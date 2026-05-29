@@ -654,7 +654,7 @@ async function syncToGist() {
         }
     };
     
-    try {GI
+    try {
         const response = await fetch(`https://api.github.com/gists/${d9d233e7caa54b86d96cba753b3171db}`, {
             method: 'PATCH',
             headers: {
