@@ -633,6 +633,7 @@ const GIST_ID = "d9d233e7caa54b86d96cba753b3171db";  // ← عدد انتهای 
 const GITHUB_TOKEN = "ghp_3EJFweJfejCwJIgA7Y1QqFhoaYnrEZ0eGAIf";  // ← توکن ساخته شده را اینجا بگذارید
 
 // تابع ارسال به Gist
+// تابع ارسال به Gist
 async function syncToGist() {
     showToast("📡 در حال ارسال به سرور...");
     
@@ -655,7 +656,7 @@ async function syncToGist() {
     };
     
     try {
-        const response = await fetch(`https://api.github.com/gists/${d9d233e7caa54b86d96cba753b3171db}`, {
+        const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `token ${GITHUB_TOKEN}`,
@@ -668,9 +669,12 @@ async function syncToGist() {
         if (response.ok) {
             showToast("✅ داده‌ها با موفقیت به سرور ارسال شد");
         } else {
-            showToast("❌ خطا در ارسال به سرور");
+            const errorText = await response.text();
+            console.error("Error:", errorText);
+            showToast(`❌ خطا در ارسال: ${response.status}`);
         }
     } catch(error) {
+        console.error("Network error:", error);
         showToast("❌ خطای شبکه: " + error.message);
     }
 }
