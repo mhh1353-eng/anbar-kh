@@ -627,8 +627,6 @@ let transactions = [];
 
 let selectedProductId = null;
 let currentEditProductId = null;
-const GIST_ID = "d9d233e7caa54b86d96cba753b3171db";
-let GITHUB_TOKEN = localStorage.getItem('github_token') || "";
 
 async function syncToGist() {
     // بررسی وجود توکن
@@ -687,32 +685,6 @@ async function syncToGist() {
     }
 }
 
-// تابع دریافت از Gist
-async function syncFromGist() {
-    showToast("📡 در حال دریافت از سرور...");
-    try {
-        const rawUrl = `https://gist.githubusercontent.com/mhh1353-eng/${GIST_ID}/raw/anbar-data.json`;
-        
-        const response = await fetch(rawUrl);
-        
-        if (response.ok) {
-            const data = await response.json();
-            products = data.products || [];
-            warehouses = data.warehouses || [];
-            inventory = data.inventory || [];
-            transactions = data.transactions || [];
-            
-            autoSave();
-            refreshAllPages();
-            showToast("✅ داده‌ها با موفقیت دریافت شد");
-        } else {
-            showToast(`❌ خطا: ${response.status} - فایل پیدا نشد`);
-        }
-    } catch(error) {
-        console.error("Network error:", error);
-        showToast("❌ خطای شبکه: " + error.message);
-    }
-}
 // تابع بروزرسانی همه صفحات
 function refreshAllPages() {
     renderInventory(getSelectedWarehouses());
@@ -2541,6 +2513,69 @@ function deleteWarehouse(id) {
     }
 }
 
+// ==================== هماهنگ‌سازی دستی بین کاربران ====================
+
+// تابع خروجی (ارسال به همکار)
+function exportForTeam() {
+    const data = {
+        products: products,
+        warehouses: warehouses,
+        inventory: inventory,
+        transactions: transactions,
+        version: "4.0",
+        exportDate: new Date().toLocaleString('fa-IR')
+    };
+    
+    const dataStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `anbar_data_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    showToast("✅ فایل داده‌ها ساخته شد. برای همکار بفرستید.");
+}
+
+// تابع ورودی (دریافت از همکار)
+function importFromTeam() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            try {
+                const receivedData = JSON.parse(evt.target.result);
+                
+                // اعتبارسنجی داده‌ها
+                if (receivedData.products && receivedData.warehouses) {
+                    products = receivedData.products;
+                    warehouses = receivedData.warehouses;
+                    inventory = receivedData.inventory || [];
+                    transactions = receivedData.transactions || [];
+                    
+                    // ذخیره و بروزرسانی
+                    autoSave();
+                    refreshAllPages();
+                    
+                    showToast("✅ داده‌های همکار با موفقیت وارد شد");
+                } else {
+                    showToast("❌ فایل معتبر نیست");
+                }
+            } catch(err) {
+                console.error(err);
+                showToast("❌ خطا در خواندن فایل");
+            }
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
 // ==================== پشتیبان‌گیری ====================
 
 function createBackup() {
