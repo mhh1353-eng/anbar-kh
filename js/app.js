@@ -627,14 +627,16 @@ let transactions = [];
 
 let selectedProductId = null;
 let currentEditProductId = null;
-// ==================== همگام‌سازی با Gist ====================
-// ⚠️ این دو مقدار را با مقادیر خودتان جایگزین کنید ⚠️
 const GIST_ID = "d9d233e7caa54b86d96cba753b3171db";
-const GITHUB_TOKEN = "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";
+let GITHUB_TOKEN = localStorage.getItem('github_token') || "";
 
-// تابع ارسال به Gist
-// تابع ارسال به Gist
 async function syncToGist() {
+    // بررسی وجود توکن
+    if (!GITHUB_TOKEN) {
+        showToast("❌ لطفاً ابتدا توکن گیت‌هاب را در صفحه لاگین وارد کنید");
+        return;
+    }
+    
     showToast("📡 در حال ارسال به سرور...");
     
     const data = {
@@ -671,7 +673,13 @@ async function syncToGist() {
         } else {
             const errorText = await response.text();
             console.error("Error:", errorText);
-            showToast(`❌ خطا در ارسال: ${response.status}`);
+            if (response.status === 401) {
+                showToast("❌ توکن نامعتبر است. لطفاً توکن صحیح را وارد کنید");
+                localStorage.removeItem('github_token');
+                GITHUB_TOKEN = "";
+            } else {
+                showToast(`❌ خطا در ارسال: ${response.status}`);
+            }
         }
     } catch(error) {
         console.error("Network error:", error);
@@ -683,7 +691,6 @@ async function syncToGist() {
 async function syncFromGist() {
     showToast("📡 در حال دریافت از سرور...");
     try {
-        // آدرس RAW برای Gist عمومی (بدون نیاز به توکن)
         const rawUrl = `https://gist.githubusercontent.com/mhh1353-eng/${GIST_ID}/raw/anbar-data.json`;
         
         const response = await fetch(rawUrl);
