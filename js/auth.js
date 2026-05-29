@@ -9,6 +9,14 @@ const DEFAULT_USERS = [
         displayName: "مدیر سیستم",
         role: "admin",
         lastLogin: null
+    },
+    {
+        id: 2,
+        username: "babak",
+        password: "123",
+        displayName: "بابک",
+        role: "senior_keeper",
+        lastLogin: null
     }
 ];
 
