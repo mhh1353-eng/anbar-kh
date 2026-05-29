@@ -281,27 +281,23 @@
     <div id="mainApp" style="display: none;">
         <!-- ریبون منو با تاریخ -->
         <div class="ribbon">
-            <div class="ribbon-items">
-                <div class="ribbon-item active" data-page="dashboard">🏠 داشبورد</div>
-                <div class="ribbon-item" data-page="products" id="menuProducts">📦 مدیریت کالاها</div>
-                <div class="ribbon-item" data-page="warehouses" id="menuWarehouses">🏢 مدیریت انبارها</div>
-                <div class="ribbon-item" data-page="purchase" id="menuPurchase">🛒 ورود کالا</div>
-                <div class="ribbon-item" data-page="consumption">📤 خروج کالا</div>
-                <div class="ribbon-item" data-page="transfer">🔄 انتقال بین انبار</div>
-                <div class="ribbon-item" data-page="reports">📊 گزارش‌ها</div>
-                <div class="ribbon-item" data-page="backup" id="menuBackup">💾 پشتیبان</div>
-                <div class="ribbon-item" id="menuUsers" style="display: none;" data-page="users">👥 مدیریت کاربران</div>
-            </div>
-            <div class="ribbon-date" id="currentDate">
-                <i>📅</i>
-                <span>در حال بارگذاری...</span>
-            </div>
-
-          <div class="ribbon-user">
-    <span id="userNameDisplay"></span>
-    <button class="btn-logout" onclick="logout()">🚪 خروج</button>
-    <button class="btn-gold" onclick="exportForTeam()" style="padding: 6px 12px; margin-left: 10px;">📤 ارسال به همکار</button>
-    <button class="btn-gold" onclick="importFromTeam()" style="padding: 6px 12px;">📥 دریافت از همکار</button>
+    <div class="ribbon-items">
+        <div class="ribbon-item active" data-page="dashboard">🏠 داشبورد</div>
+        <div class="ribbon-item" data-page="products">📦 مدیریت کالاها</div>
+        <div class="ribbon-item" data-page="warehouses">🏢 مدیریت انبارها</div>
+        <div class="ribbon-item" data-page="purchase">🛒 ورود کالا</div>
+        <div class="ribbon-item" data-page="consumption">📤 خروج کالا</div>
+        <div class="ribbon-item" data-page="transfer">🔄 انتقال بین انبار</div>
+        <div class="ribbon-item" data-page="reports">📊 گزارش‌ها</div>
+        <div class="ribbon-item" data-page="backup">💾 پشتیبان</div>
+    </div>
+    <div class="ribbon-date" id="currentDate">
+        <span>در حال بارگذاری...</span>
+    </div>
+    <div class="ribbon-user">
+        <span id="userNameDisplay"></span>
+        <button class="btn-logout" onclick="logout()">🚪 خروج</button>
+    </div>
 </div>
         <!-- منوی راست کلیک -->
         <div class="context-menu" id="contextMenu">
@@ -330,6 +326,8 @@
                     <button class="btn btn-gold" onclick="exportInventoryToExcel()">📥 خروجی اکسل</button>
                     <button class="btn btn-brown" onclick="printReport()">🖨️ پرینت</button>
                     <button class="btn btn-gold" onclick="refreshInventory()">🔄 بروزرسانی</button>
+                    <button class="btn btn-gold" onclick="exportForTeam()">📤 ارسال به همکار</button>
+<button class="btn btn-gold" onclick="importFromTeam()">📥 دریافت از همکار</button>
                 </div>
 
                 <div class="stats-cards">
