@@ -630,7 +630,7 @@ let currentEditProductId = null;
 // ==================== همگام‌سازی با Gist ====================
 // ⚠️ این دو مقدار را با مقادیر خودتان جایگزین کنید ⚠️
 const GIST_ID = "d9d233e7caa54b86d96cba753b3171db";  // ← عدد انتهای آدرس Gist خود را اینجا بگذارید
-const GITHUB_TOKEN = "ghp_3EJFweJfejCwJIgA7Y1QqFhoaYnrEZ0eGAIf";  // ← توکن ساخته شده را اینجا بگذارید
+const GITHUB_TOKEN = "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";  // ← توکن ساخته شده را اینجا بگذارید
 
 // تابع ارسال به Gist
 // تابع ارسال به Gist
