@@ -62,18 +62,13 @@
                 <i>📅</i>
                 <span>در حال بارگذاری...</span>
             </div>
-            <div class="ribbon-user">
-                <span id="userNameDisplay"></span>
-                <button class="btn-logout" onclick="logout()">🚪 خروج</button>
-            </div>
-            <button class="btn-gold" onclick="syncToGist()" style="padding: 6px 12px; margin-right: 10px;">
-    📤 ارسال به سرور
-</button>
-<button class="btn-gold" onclick="syncFromGist()" style="padding: 6px 12px; margin-right: 10px;">
-    📥 دریافت از سرور
-</button>
-        </div>
 
+          <div class="ribbon-user">
+    <span id="userNameDisplay"></span>
+    <button class="btn-logout" onclick="logout()">🚪 خروج</button>
+    <button class="btn-gold" onclick="exportForTeam()" style="padding: 6px 12px; margin-left: 10px;">📤 ارسال به همکار</button>
+    <button class="btn-gold" onclick="importFromTeam()" style="padding: 6px 12px;">📥 دریافت از همکار</button>
+</div>
         <!-- منوی راست کلیک -->
         <div class="context-menu" id="contextMenu">
             <div class="context-menu-item" onclick="showProductHistory()">
@@ -589,12 +584,6 @@
                 <div class="history-timeline" id="historyTimeline"></div>
 
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn-gold" onclick="exportForTeam()" style="padding: 6px 12px; margin-left: 10px;">
-    📤 ارسال به همکار
-</button>
-<button class="btn-gold" onclick="importFromTeam()" style="padding: 6px 12px;">
-    📥 دریافت از همکار
-</button>
                     <button class="btn btn-gold" onclick="exportProductHistory()">📥 خروجی اکسل</button>
                     <button class="btn btn-brown" onclick="hideModal('productHistoryModal')">❌ بستن</button>
                 </div>
