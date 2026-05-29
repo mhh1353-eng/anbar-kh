@@ -35,7 +35,6 @@ let currentUser = null;
 function login() {
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
-    const token = document.getElementById('loginToken').value.trim();  // ← اضافه شد
     const errorEl = document.getElementById('loginError');
     
     if (!username || !password) {
@@ -51,11 +50,7 @@ function login() {
         return;
     }
     
-    // ذخیره توکن اگر وارد شده باشد
-    if (token) {
-        localStorage.setItem('github_token', token);
-    }
-    
+     
     // بروزرسانی آخرین ورود
     user.lastLogin = new Date().toLocaleString('fa-IR');
     saveUsers(users);
