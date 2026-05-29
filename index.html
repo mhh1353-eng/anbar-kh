@@ -14,6 +14,240 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #F5F0E6;
+        padding: 10px;
+        font-family: 'Tahoma', sans-serif;
+    }
+
+    .ribbon {
+        background: #3E2723;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .ribbon-items {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .ribbon-item {
+        color: white;
+        padding: 6px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        background: #5D4037;
+    }
+
+    .ribbon-item.active {
+        background: #C6A15B;
+        color: #3E2723;
+    }
+
+    .ribbon-date {
+        background: #C6A15B;
+        padding: 6px 15px;
+        border-radius: 20px;
+    }
+
+    .ribbon-user {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn-logout {
+        background: none;
+        border: 1px solid #C6A15B;
+        color: #C6A15B;
+        padding: 5px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .btn-gold {
+        background: #C6A15B;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #3E2723;
+    }
+
+    .main-container {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        min-height: 500px;
+        width: 100%;
+    }
+
+    .page {
+        display: none;
+        width: 100%;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    .inventory-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .inventory-table th, .inventory-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .inventory-table th {
+        background: #3E2723;
+        color: white;
+    }
+
+    .stats-cards {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .stat-card {
+        background: #3E2723;
+        color: white;
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        flex: 1;
+    }
+
+    .stat-card .number {
+        font-size: 24px;
+        color: #C6A15B;
+        font-weight: bold;
+    }
+
+    .action-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        background: #FAF7F2;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-gold {
+        background: #C6A15B;
+        color: #3E2723;
+    }
+
+    .btn-brown {
+        background: #3E2723;
+        color: white;
+    }
+
+    .btn-info {
+        background: #3498db;
+        color: white;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .toast-message {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #3E2723;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        z-index: 2000;
+    }
+
+    .price-column {
+        display: table-cell;
+    }
+
+    .price-column.hidden {
+        display: none;
+    }
+
+    .action-column {
+        display: table-cell;
+    }
+
+    .action-column.hidden {
+        display: none;
+    }
+</style>
 </head>
 <body>
     <!-- صفحه لاگین (ابتدا نمایش داده می‌شود) -->
