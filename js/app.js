@@ -630,7 +630,7 @@ let currentEditProductId = null;
 // ==================== همگام‌سازی با Gist ====================
 // ⚠️ این دو مقدار را با مقادیر خودتان جایگزین کنید ⚠️
 const GIST_ID = "d9d233e7caa54b86d96cba753b3171db";  // ← عدد انتهای آدرس Gist خود را اینجا بگذارید
-const GITHUB_TOKEN = "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";  // ← توکن ساخته شده را اینجا بگذارید
+const GITHUB_TOKEN = "ghp_3EJFweJfejCwJIgA7Y1QqFhoaYnrEZ0eGAIf";  // ← توکن ساخته شده را اینجا بگذارید
 
 // تابع ارسال به Gist
 async function syncToGist() {
@@ -678,20 +678,14 @@ async function syncToGist() {
 // تابع دریافت از Gist
 async function syncFromGist() {
     showToast("📡 در حال دریافت از سرور...");
-    
     try {
-        const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
-            headers: {
-                'Authorization': `token ${GITHUB_TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
+        // آدرس RAW برای Gist عمومی (بدون نیاز به توکن)
+        const rawUrl = `https://gist.githubusercontent.com/mhh1353-eng/${GIST_ID}/raw/anbar-data.json`;
+        
+        const response = await fetch(rawUrl);
         
         if (response.ok) {
-            const gist = await response.json();
-            const content = gist.files['anbar-data.json'].content;
-            const data = JSON.parse(content);
-            
+            const data = await response.json();
             products = data.products || [];
             warehouses = data.warehouses || [];
             inventory = data.inventory || [];
@@ -699,16 +693,15 @@ async function syncFromGist() {
             
             autoSave();
             refreshAllPages();
-            
-            showToast("✅ همگام‌سازی با سرور انجام شد");
+            showToast("✅ داده‌ها با موفقیت دریافت شد");
         } else {
-            showToast("❌ خطا در دریافت از سرور");
+            showToast(`❌ خطا: ${response.status} - فایل پیدا نشد`);
         }
     } catch(error) {
+        console.error("Network error:", error);
         showToast("❌ خطای شبکه: " + error.message);
     }
 }
-
 // تابع بروزرسانی همه صفحات
 function refreshAllPages() {
     renderInventory(getSelectedWarehouses());
