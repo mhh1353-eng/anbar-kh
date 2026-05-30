@@ -15,22 +15,21 @@ const DEFAULT_USERS = [
         username: "babak",
         password: "123",
         displayName: "بابک",
-        role: "junior_keeper",
+        role: "senior_keeper",
         lastLogin: null
     }
 ];
 
-// بارگذاری کاربران از localStorage
 function loadUsers() {
-    const saved = localStorage.getItem('system_users');
-    if (saved) {
-        return JSON.parse(saved);
-    }
-    // ذخیره کاربر پیش‌فرض
+    const DEFAULT_USERS = [
+        { id: 1, username: "mhh", password: "mhh123", displayName: "مدیر سیستم", role: "admin", lastLogin: null },
+        { id: 2, username: "babak", password: "123", displayName: "بابک", role: "senior_keeper", lastLogin: null }
+    ];
+    
+    // همیشه کاربران پیش‌فرض را ذخیره کن (اجباری)
     localStorage.setItem('system_users', JSON.stringify(DEFAULT_USERS));
     return [...DEFAULT_USERS];
 }
-
 // ذخیره کاربران
 function saveUsers(users) {
     localStorage.setItem('system_users', JSON.stringify(users));
