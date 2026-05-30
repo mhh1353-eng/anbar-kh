@@ -15,7 +15,7 @@ const DEFAULT_USERS = [
         username: "babak",
         password: "123",
         displayName: "بابک",
-        role: "senior_keeper",
+        role: "junior_keeper",
         lastLogin: null
     }
 ];
