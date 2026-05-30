@@ -4,8 +4,8 @@
 const DEFAULT_USERS = [
     {
         id: 1,
-        username: "admin",
-        password: "admin123",
+        username: "mhh",
+        password: "mhh123",
         displayName: "مدیر سیستم",
         role: "admin",
         lastLogin: null
